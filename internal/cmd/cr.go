@@ -83,9 +83,10 @@ var crListCmd = &cobra.Command{
 // ─── cr get ──────────────────────────────────────────────────────────────────
 
 var crGetCmd = &cobra.Command{
-	Use:   "get <id>",
-	Short: "Get a change request by ID",
-	Args:  cobra.ExactArgs(1),
+	Use:               "get <id>",
+	Short:             "Get a change request by ID",
+	Args:              cobra.ExactArgs(1),
+	ValidArgsFunction: completeCRID,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		conn, cfg, err := bffConn()
 		if err != nil {
@@ -207,9 +208,10 @@ var (
 )
 
 var crUpdateCmd = &cobra.Command{
-	Use:   "update <id>",
-	Short: "Update a change request",
-	Args:  cobra.ExactArgs(1),
+	Use:               "update <id>",
+	Short:             "Update a change request",
+	Args:              cobra.ExactArgs(1),
+	ValidArgsFunction: completeCRID,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		conn, cfg, err := bffConn()
 		if err != nil {
@@ -263,9 +265,10 @@ var crUpdateCmd = &cobra.Command{
 // ─── cr delete ───────────────────────────────────────────────────────────────
 
 var crDeleteCmd = &cobra.Command{
-	Use:   "delete <id>",
-	Short: "Delete (archive) a change request",
-	Args:  cobra.ExactArgs(1),
+	Use:               "delete <id>",
+	Short:             "Delete (archive) a change request",
+	Args:              cobra.ExactArgs(1),
+	ValidArgsFunction: completeCRID,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		conn, cfg, err := bffConn()
 		if err != nil {
@@ -300,9 +303,10 @@ var crDeleteCmd = &cobra.Command{
 var crStageValue string
 
 var crStageCmd = &cobra.Command{
-	Use:   "stage <id>",
-	Short: "Update the stage of a change request",
-	Args:  cobra.ExactArgs(1),
+	Use:               "stage <id>",
+	Short:             "Update the stage of a change request",
+	Args:              cobra.ExactArgs(1),
+	ValidArgsFunction: completeCRID,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if crStageValue == "" {
 			return fmt.Errorf("--stage is required")
@@ -355,9 +359,10 @@ var crCommentCmd = &cobra.Command{
 }
 
 var crCommentListCmd = &cobra.Command{
-	Use:   "list <cr-id>",
-	Short: "List comments on a change request",
-	Args:  cobra.ExactArgs(1),
+	Use:               "list <cr-id>",
+	Short:             "List comments on a change request",
+	Args:              cobra.ExactArgs(1),
+	ValidArgsFunction: completeCRID,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		conn, cfg, err := bffConn()
 		if err != nil {
@@ -394,9 +399,10 @@ var crCommentListCmd = &cobra.Command{
 var crCommentAddMsg string
 
 var crCommentAddCmd = &cobra.Command{
-	Use:   "add <cr-id>",
-	Short: "Add a comment to a change request",
-	Args:  cobra.ExactArgs(1),
+	Use:               "add <cr-id>",
+	Short:             "Add a comment to a change request",
+	Args:              cobra.ExactArgs(1),
+	ValidArgsFunction: completeCRID,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if crCommentAddMsg == "" {
 			return fmt.Errorf("--message is required")
@@ -557,6 +563,16 @@ func init() {
 	// cr comment add/update flags
 	crCommentAddCmd.Flags().StringVar(&crCommentAddMsg, "message", "", "Comment message (required)")
 	crCommentUpdateCmd.Flags().StringVar(&crCommentUpdateMsg, "message", "", "New message (required)")
+
+	// flag value completions
+	for _, cmd := range []*cobra.Command{crListCmd, crUpdateCmd} {
+		_ = cmd.RegisterFlagCompletionFunc("status", staticValues("open", "in_progress", "resolved", "closed"))
+	}
+	for _, cmd := range []*cobra.Command{crListCmd, crCreateCmd, crUpdateCmd} {
+		_ = cmd.RegisterFlagCompletionFunc("severity", staticValues("low", "medium", "high", "critical"))
+		_ = cmd.RegisterFlagCompletionFunc("type", staticValues("change", "release", "incident", "problem"))
+	}
+	_ = crStageCmd.RegisterFlagCompletionFunc("stage", staticValues("dev", "qa", "prod"))
 
 	// wire comment subcommands
 	crCommentCmd.AddCommand(crCommentListCmd, crCommentAddCmd, crCommentUpdateCmd, crCommentDeleteCmd)
