@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.1](https://github.com/bluefunda/trm-cli/compare/v1.4.0...v1.4.1) (2026-05-13)
+
+
+### Bug Fixes
+
+* use shasum on macOS for checksum verification ([5e99540](https://github.com/bluefunda/trm-cli/commit/5e995405c07a02331c895d3ba15e5345fe3813f7))
+
 ## [1.4.0](https://github.com/bluefunda/trm-cli/compare/v1.3.0...v1.4.0) (2026-05-13)
 
 
