@@ -58,6 +58,17 @@ nfpms:
         src: /opt/requests/bin/requests
         type: symlink
 
+notarize:
+  macos:
+    - enabled: true
+      sign:
+        certificate: "{{ .Env.MACOS_CERTIFICATE }}"
+        password: "{{ .Env.MACOS_CERTIFICATE_PWD }}"
+      notarize:
+        issuer_id: "{{ .Env.NOTARIZATION_ISSUER_ID }}"
+        key_id: "{{ .Env.NOTARIZATION_KEY_ID }}"
+        key: "{{ .Env.NOTARIZATION_KEY }}"
+
 homebrew_casks:
   - name: requests
     ids:
