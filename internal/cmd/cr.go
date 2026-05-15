@@ -73,6 +73,9 @@ var crListCmd = &cobra.Command{
 
 		rows := make([][]string, 0, len(resp.ChangeRequests))
 		for _, cr := range resp.ChangeRequests {
+			if cr == nil || cr.Id == "" || cr.Id == "<nil>" {
+				continue
+			}
 			rows = append(rows, []string{cr.Id, cr.Description, cr.Status, cr.Severity, cr.RequestOwner, cr.CreatedAt})
 		}
 		p.Table([]string{"ID", "DESCRIPTION", "STATUS", "SEVERITY", "OWNER", "CREATED"}, rows)
@@ -135,11 +138,11 @@ var crGetCmd = &cobra.Command{
 // ─── cr create ───────────────────────────────────────────────────────────────
 
 var (
-	crCreateDesc      string
-	crCreateProject   string
-	crCreateType      string
-	crCreateSeverity  string
-	crCreateAssignee  string
+	crCreateDesc     string
+	crCreateProject  string
+	crCreateType     string
+	crCreateSeverity string
+	crCreateAssignee string
 )
 
 var crCreateCmd = &cobra.Command{
