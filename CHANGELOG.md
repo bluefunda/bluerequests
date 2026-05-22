@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/bluefunda/trm-cli/compare/v1.5.0...v1.6.0) (2026-05-22)
+
+
+### Features
+
+* add interactive TUI dashboard for change requests ([#26](https://github.com/bluefunda/trm-cli/issues/26)) ([d523c0c](https://github.com/bluefunda/trm-cli/commit/d523c0ce0314979477cd9f29c0ae4443198cc281))
+
 ## [1.5.0](https://github.com/bluefunda/trm-cli/compare/v1.4.2...v1.5.0) (2026-05-14)
 
 
