@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 	"text/tabwriter"
 
 	"github.com/fatih/color"
@@ -13,11 +14,52 @@ import (
 )
 
 var (
-	green  = color.New(color.FgGreen).SprintFunc()
-	red    = color.New(color.FgRed).SprintFunc()
-	yellow = color.New(color.FgYellow).SprintFunc()
-	cyan   = color.New(color.FgCyan).SprintFunc()
+	green   = color.New(color.FgGreen).SprintFunc()
+	red     = color.New(color.FgRed).SprintFunc()
+	yellow  = color.New(color.FgYellow).SprintFunc()
+	cyan    = color.New(color.FgCyan).SprintFunc()
+	magenta = color.New(color.FgMagenta).SprintFunc()
+	blue    = color.New(color.FgBlue).SprintFunc()
+	hiRed   = color.New(color.FgHiRed, color.Bold).SprintFunc()
 )
+
+// SeverityColor returns a terminal-colored severity string.
+func SeverityColor(s string) string {
+	switch s {
+	case "low":
+		return yellow(s)
+	case "medium":
+		return color.New(color.FgYellow, color.Bold).Sprint(s)
+	case "high":
+		return red(s)
+	case "critical":
+		return hiRed(s)
+	default:
+		return s
+	}
+}
+
+// StatusColor returns a terminal-colored status string.
+func StatusColor(s string) string {
+	switch strings.ToLower(s) {
+	case "planned":
+		return cyan(s)
+	case "inprogress", "in_progress":
+		return yellow(s)
+	case "completed", "imported":
+		return green(s)
+	case "qa", "toc_importing_to_qa", "toc_imported_to_qa":
+		return magenta(s)
+	case "uat", "uat_approved":
+		return blue(s)
+	case "release_management", "toc_release_initiated", "toc_released",
+		"transport_release_from_dev", "transport_released",
+		"import_to_prod", "schedule_import", "import_is_scheduled":
+		return color.New(color.FgHiMagenta).Sprint(s)
+	default:
+		return s
+	}
+}
 
 // OutputFormat controls how command results are rendered.
 type OutputFormat string

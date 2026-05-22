@@ -7,6 +7,8 @@ import (
 
 	pb "github.com/bluefunda/trm-cli/api/proto/bff"
 	trmgrpc "github.com/bluefunda/trm-cli/internal/grpc"
+	"github.com/bluefunda/trm-cli/internal/tui"
+	"github.com/bluefunda/trm-cli/internal/ui"
 )
 
 // ─── cr ──────────────────────────────────────────────────────────────────────
@@ -76,7 +78,14 @@ var crListCmd = &cobra.Command{
 			if cr == nil || cr.Id == "" || cr.Id == "<nil>" {
 				continue
 			}
-			rows = append(rows, []string{cr.Id, cr.Description, cr.Status, cr.Severity, cr.RequestOwner, cr.CreatedAt})
+			rows = append(rows, []string{
+				cr.Id,
+				cr.Description,
+				ui.StatusColor(cr.Status),
+				ui.SeverityColor(cr.Severity),
+				cr.RequestOwner,
+				cr.CreatedAt,
+			})
 		}
 		p.Table([]string{"ID", "DESCRIPTION", "STATUS", "SEVERITY", "OWNER", "CREATED"}, rows)
 		return nil
@@ -120,9 +129,9 @@ var crGetCmd = &cobra.Command{
 			[][]string{
 				{"id", cr.Id},
 				{"description", cr.Description},
-				{"status", cr.Status},
+				{"status", ui.StatusColor(cr.Status)},
 				{"request_type", cr.RequestType},
-				{"severity", cr.Severity},
+				{"severity", ui.SeverityColor(cr.Severity)},
 				{"owner", cr.RequestOwner},
 				{"assignee", cr.Assignee},
 				{"project_id", cr.ProjectId},
@@ -534,6 +543,24 @@ var crCommentDeleteCmd = &cobra.Command{
 	},
 }
 
+// ─── cr watch ────────────────────────────────────────────────────────────────
+
+var crWatchCmd = &cobra.Command{
+	Use:   "watch",
+	Short: "Interactive TUI dashboard for change requests",
+	Long: `Opens an interactive terminal dashboard for browsing and inspecting
+change requests. Navigate with ↑↓ or j/k, press / to filter,
+Enter to drill into a CR, and q to quit.`,
+	RunE: func(cmd *cobra.Command, args []string) error {
+		conn, _, err := bffConn()
+		if err != nil {
+			return err
+		}
+		defer func() { _ = conn.Close() }()
+		return tui.Run(conn)
+	},
+}
+
 // ─── init ────────────────────────────────────────────────────────────────────
 
 func init() {
@@ -581,5 +608,5 @@ func init() {
 	crCommentCmd.AddCommand(crCommentListCmd, crCommentAddCmd, crCommentUpdateCmd, crCommentDeleteCmd)
 
 	// wire cr subcommands
-	crCmd.AddCommand(crListCmd, crGetCmd, crCreateCmd, crUpdateCmd, crDeleteCmd, crStageCmd, crCommentCmd)
+	crCmd.AddCommand(crListCmd, crGetCmd, crCreateCmd, crUpdateCmd, crDeleteCmd, crStageCmd, crCommentCmd, crWatchCmd)
 }
