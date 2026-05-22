@@ -10,14 +10,12 @@ import (
 var (
 	colPrimary  = lipgloss.Color("#1e64e7")
 	colNavy     = lipgloss.Color("#1b1e37")
-	colBg       = lipgloss.Color("#0d1117")
 	colText     = lipgloss.Color("#e2e8f0")
 	colMuted    = lipgloss.Color("#8892a4")
 	colBorder   = lipgloss.Color("#2d3748")
 	colSelected = lipgloss.Color("#1e3a5f")
 	colGreen    = lipgloss.Color("#22c55e")
 	colRed      = lipgloss.Color("#ef4444")
-	colOrange   = lipgloss.Color("#fa9d3f")
 
 	// Severity — from web app CSS variables
 	colSevLow      = lipgloss.Color("#f7aa16")
@@ -44,9 +42,6 @@ var (
 			Foreground(colPrimary).
 			Bold(true)
 
-	sHeaderMeta = lipgloss.NewStyle().
-			Foreground(colMuted)
-
 	sFooter = lipgloss.NewStyle().
 		Background(colNavy).
 		Foreground(colMuted).
@@ -55,9 +50,6 @@ var (
 	sKeyName = lipgloss.NewStyle().
 			Foreground(colPrimary).
 			Bold(true)
-
-	sTable = lipgloss.NewStyle().
-		Border(lipgloss.NormalBorder(), false, false, false, false)
 
 	sColHeader = lipgloss.NewStyle().
 			Foreground(colMuted).
@@ -72,9 +64,6 @@ var (
 
 	sMuted = lipgloss.NewStyle().
 		Foreground(colMuted)
-
-	sSuccess = lipgloss.NewStyle().
-			Foreground(colGreen)
 
 	sError = lipgloss.NewStyle().
 		Foreground(colRed)
