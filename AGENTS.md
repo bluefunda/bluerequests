@@ -6,10 +6,10 @@ Instructions for AI coding agents working on bluerequests.
 
 Go 1.25 CLI for the BlueFunda bluerequests change/release management platform. All requests flow through `trm-bff` via gRPC — the CLI never talks to NATS or backend services directly.
 
-Binary name: `req`
+Binary name: `breq`
 Module: `github.com/bluefunda/bluerequests`
-Entry point: `cmd/req/main.go`
-Config location: `~/.req/config.yaml`
+Entry point: `cmd/breq/main.go`
+Config location: `~/.breq/config.yaml`
 
 ## Build and Test Commands
 
@@ -35,7 +35,7 @@ All must pass with zero errors before committing.
 ## Project Structure
 
 ```
-cmd/req/main.go                 # Entry point: invokes root command
+cmd/breq/main.go                 # Entry point: invokes root command
 api/proto/
   bff.proto                     # BFFService definition — keep in sync with trm-bff
   bff/
@@ -57,7 +57,7 @@ internal/
   auth/
     auth.go                     # OAuth2 device authorization grant (RFC 8628)
   config/
-    config.go                   # ~/.req/config.yaml loader; token storage
+    config.go                   # ~/.breq/config.yaml loader; token storage
   ui/
     output.go                   # Printer: table/json/quiet output modes
 scripts/
@@ -72,16 +72,16 @@ scripts/
 | `req events sub`   | SubscribeEvents          | Stream realm-scoped events           |
 | `req events pub`   | PublishEvent             | Publish event to NATS subject        |
 | `req rpc request`  | RequestReply             | NATS request-reply                   |
-| `req cr list`      | ListChangeRequests       | List change requests with filters    |
-| `req cr get`       | GetChangeRequest         | Get a single change request by ID    |
-| `req cr create`    | CreateChangeRequest      | Create a new change request          |
-| `req cr update`    | UpdateChangeRequest      | Update fields on a change request    |
-| `req cr delete`    | DeleteChangeRequest      | Archive a change request             |
-| `req cr stage`     | UpdateChangeRequestStage | Advance the workflow stage           |
-| `req cr comment list`   | ListComments        | List comments on a change request    |
-| `req cr comment add`    | AddComment          | Add a comment                        |
-| `req cr comment update` | UpdateComment       | Edit a comment                       |
-| `req cr comment delete` | DeleteComment       | Delete a comment                     |
+| `breq cr list`      | ListChangeRequests       | List change requests with filters    |
+| `breq cr get`       | GetChangeRequest         | Get a single change request by ID    |
+| `breq cr create`    | CreateChangeRequest      | Create a new change request          |
+| `breq cr update`    | UpdateChangeRequest      | Update fields on a change request    |
+| `breq cr delete`    | DeleteChangeRequest      | Archive a change request             |
+| `breq cr stage`     | UpdateChangeRequestStage | Advance the workflow stage           |
+| `breq cr comment list`   | ListComments        | List comments on a change request    |
+| `breq cr comment add`    | AddComment          | Add a comment                        |
+| `breq cr comment update` | UpdateComment       | Edit a comment                       |
+| `breq cr comment delete` | DeleteComment       | Delete a comment                     |
 
 ## Adding a New Command
 
@@ -152,5 +152,5 @@ Follows `bluefunda` org-level standards:
 
 - Connect to NATS, trm-backend-go, or Keycloak directly from the CLI — all traffic goes through `trm-bff` via gRPC
 - Edit `api/proto/bff/bff.pb.go` or `bff_grpc.pb.go` by hand — regenerate with `make proto`
-- Commit tokens, credentials, or `~/.req/` contents
+- Commit tokens, credentials, or `~/.breq/` contents
 - Modify `.github/workflows/` without explicit request

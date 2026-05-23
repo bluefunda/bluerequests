@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-We release security fixes for the latest stable version of `req`.
+We release security fixes for the latest stable version of `breq`.
 
 | Version | Supported |
 |---------|-----------|

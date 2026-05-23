@@ -69,7 +69,7 @@ Open a [GitHub Issue](https://github.com/bluefunda/bluerequests/issues) with:
 - A clear description of the problem
 - Steps to reproduce
 - Expected vs actual behavior
-- Version (`req version`) and OS/arch
+- Version (`breq version`) and OS/arch
 
 ## License
 

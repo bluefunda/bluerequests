@@ -16,9 +16,9 @@ var (
 var Version = "dev"
 
 var rootCmd = &cobra.Command{
-	Use:     "req",
-	Short:   "req -- CLI for the bluerequests change/release management platform",
-	Long:    "req is a command-line interface for interacting with the BlueRequests platform via gRPC.",
+	Use:     "breq",
+	Short:   "breq -- CLI for the bluerequests change/release management platform",
+	Long:    "breq is a command-line interface for interacting with the BlueRequests platform via gRPC.",
 	Version: Version,
 }
 
