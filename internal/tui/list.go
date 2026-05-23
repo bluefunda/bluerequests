@@ -11,7 +11,7 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 
-	pb "github.com/bluefunda/trm-cli/api/proto/bff"
+	pb "github.com/bluefunda/bluerequests/api/proto/bff"
 )
 
 // ── messages ─────────────────────────────────────────────────────────────────

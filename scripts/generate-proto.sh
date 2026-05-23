@@ -12,7 +12,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
 PROTO_DIR="$ROOT_DIR/api/proto"
 OUT_DIR="$PROTO_DIR/bff"
-MODULE="github.com/bluefunda/trm-cli"
+MODULE="github.com/bluefunda/bluerequests"
 
 mkdir -p "$OUT_DIR"
 

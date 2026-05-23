@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	trmgrpc "github.com/bluefunda/trm-cli/internal/grpc"
+	trmgrpc "github.com/bluefunda/bluerequests/internal/grpc"
 )
 
 var healthCmd = &cobra.Command{

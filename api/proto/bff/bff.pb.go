@@ -1794,7 +1794,7 @@ const file_bff_proto_rawDesc = "" +
 	"\n" +
 	"AddComment\x12\x19.bff.v1.AddCommentRequest\x1a\x1a.bff.v1.AddCommentResponse\x12L\n" +
 	"\rUpdateComment\x12\x1c.bff.v1.UpdateCommentRequest\x1a\x1d.bff.v1.UpdateCommentResponse\x12L\n" +
-	"\rDeleteComment\x12\x1c.bff.v1.DeleteCommentRequest\x1a\x1d.bff.v1.DeleteCommentResponseB,Z*github.com/bluefunda/trm-cli/api/proto/bffb\x06proto3"
+	"\rDeleteComment\x12\x1c.bff.v1.DeleteCommentRequest\x1a\x1d.bff.v1.DeleteCommentResponseB1Z/github.com/bluefunda/bluerequests/api/proto/bffb\x06proto3"
 
 var (
 	file_bff_proto_rawDescOnce sync.Once

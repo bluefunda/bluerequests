@@ -1,20 +1,20 @@
 # AGENTS.md
 
-Instructions for AI coding agents working on trm-cli.
+Instructions for AI coding agents working on bluerequests.
 
 ## Project Overview
 
-Go 1.24 CLI for the BlueFunda bluerequests change/release management platform. All requests flow through `trm-bff` via gRPC — the CLI never talks to NATS or backend services directly.
+Go 1.25 CLI for the BlueFunda bluerequests change/release management platform. All requests flow through `trm-bff` via gRPC — the CLI never talks to NATS or backend services directly.
 
-Binary name: `requests`
-Module: `github.com/bluefunda/trm-cli`
-Entry point: `cmd/requests/main.go`
-Config location: `~/.trm/config.yaml`
+Binary name: `req`
+Module: `github.com/bluefunda/bluerequests`
+Entry point: `cmd/req/main.go`
+Config location: `~/.req/config.yaml`
 
 ## Build and Test Commands
 
 ```bash
-make build          # go mod tidy + build binary to ./requests
+make build          # go mod tidy + build binary to ./req
 make vet            # go vet ./...
 make fmt            # gofmt -w .
 make tidy           # go mod tidy
@@ -35,7 +35,7 @@ All must pass with zero errors before committing.
 ## Project Structure
 
 ```
-cmd/requests/main.go            # Entry point: invokes root command
+cmd/req/main.go                 # Entry point: invokes root command
 api/proto/
   bff.proto                     # BFFService definition — keep in sync with trm-bff
   bff/
@@ -57,7 +57,7 @@ internal/
   auth/
     auth.go                     # OAuth2 device authorization grant (RFC 8628)
   config/
-    config.go                   # ~/.trm/config.yaml loader; token storage
+    config.go                   # ~/.req/config.yaml loader; token storage
   ui/
     output.go                   # Printer: table/json/quiet output modes
 scripts/
@@ -66,22 +66,22 @@ scripts/
 
 ## BFFService RPC Surface
 
-| Command group          | RPC                      | Description                          |
-|------------------------|--------------------------|--------------------------------------|
-| `requests user info`   | GetUserInfo              | Current user from Keycloak           |
-| `requests events sub`  | SubscribeEvents          | Stream realm-scoped events           |
-| `requests events pub`  | PublishEvent             | Publish event to NATS subject        |
-| `requests rpc request` | RequestReply             | NATS request-reply                   |
-| `requests cr list`     | ListChangeRequests       | List change requests with filters    |
-| `requests cr get`      | GetChangeRequest         | Get a single change request by ID    |
-| `requests cr create`   | CreateChangeRequest      | Create a new change request          |
-| `requests cr update`   | UpdateChangeRequest      | Update fields on a change request    |
-| `requests cr delete`   | DeleteChangeRequest      | Archive a change request             |
-| `requests cr stage`    | UpdateChangeRequestStage | Advance the workflow stage           |
-| `requests cr comment list`   | ListComments       | List comments on a change request    |
-| `requests cr comment add`    | AddComment         | Add a comment                        |
-| `requests cr comment update` | UpdateComment      | Edit a comment                       |
-| `requests cr comment delete` | DeleteComment      | Delete a comment                     |
+| Command group      | RPC                      | Description                          |
+|--------------------|--------------------------|--------------------------------------|
+| `req user info`    | GetUserInfo              | Current user from Keycloak           |
+| `req events sub`   | SubscribeEvents          | Stream realm-scoped events           |
+| `req events pub`   | PublishEvent             | Publish event to NATS subject        |
+| `req rpc request`  | RequestReply             | NATS request-reply                   |
+| `req cr list`      | ListChangeRequests       | List change requests with filters    |
+| `req cr get`       | GetChangeRequest         | Get a single change request by ID    |
+| `req cr create`    | CreateChangeRequest      | Create a new change request          |
+| `req cr update`    | UpdateChangeRequest      | Update fields on a change request    |
+| `req cr delete`    | DeleteChangeRequest      | Archive a change request             |
+| `req cr stage`     | UpdateChangeRequestStage | Advance the workflow stage           |
+| `req cr comment list`   | ListComments        | List comments on a change request    |
+| `req cr comment add`    | AddComment          | Add a comment                        |
+| `req cr comment update` | UpdateComment       | Edit a comment                       |
+| `req cr comment delete` | DeleteComment       | Delete a comment                     |
 
 ## Adding a New Command
 
@@ -95,7 +95,7 @@ scripts/
 `api/proto/bff.proto` must stay in sync with `trm-bff/api/proto/bff.proto`. When adding RPCs:
 
 1. Add the RPC and message types to both `bff.proto` files
-2. Run `make proto` in trm-cli to regenerate client bindings
+2. Run `make proto` in bluerequests to regenerate client bindings
 3. Implement the client call in `internal/cmd/*.go`
 4. Implement the server handler in trm-bff `internal/transport/grpc/handler.go`
 
@@ -152,5 +152,5 @@ Follows `bluefunda` org-level standards:
 
 - Connect to NATS, trm-backend-go, or Keycloak directly from the CLI — all traffic goes through `trm-bff` via gRPC
 - Edit `api/proto/bff/bff.pb.go` or `bff_grpc.pb.go` by hand — regenerate with `make proto`
-- Commit tokens, credentials, or `~/.trm/` contents
+- Commit tokens, credentials, or `~/.req/` contents
 - Modify `.github/workflows/` without explicit request

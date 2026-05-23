@@ -19,8 +19,8 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	pb "github.com/bluefunda/trm-cli/api/proto/bff"
-	"github.com/bluefunda/trm-cli/internal/config"
+	pb "github.com/bluefunda/bluerequests/api/proto/bff"
+	"github.com/bluefunda/bluerequests/internal/config"
 )
 
 const DefaultTimeout = 30 * time.Second

@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/bluefunda/trm-cli/internal/auth"
+	"github.com/bluefunda/bluerequests/internal/auth"
 )
 
 var loginCmd = &cobra.Command{

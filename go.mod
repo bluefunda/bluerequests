@@ -1,4 +1,4 @@
-module github.com/bluefunda/trm-cli
+module github.com/bluefunda/bluerequests
 
 go 1.25.0
 

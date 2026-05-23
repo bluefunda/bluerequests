@@ -5,10 +5,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	pb "github.com/bluefunda/trm-cli/api/proto/bff"
-	trmgrpc "github.com/bluefunda/trm-cli/internal/grpc"
-	"github.com/bluefunda/trm-cli/internal/tui"
-	"github.com/bluefunda/trm-cli/internal/ui"
+	pb "github.com/bluefunda/bluerequests/api/proto/bff"
+	trmgrpc "github.com/bluefunda/bluerequests/internal/grpc"
+	"github.com/bluefunda/bluerequests/internal/tui"
+	"github.com/bluefunda/bluerequests/internal/ui"
 )
 
 // ─── cr ──────────────────────────────────────────────────────────────────────

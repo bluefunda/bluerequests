@@ -8,8 +8,8 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/lipgloss"
 
-	pb "github.com/bluefunda/trm-cli/api/proto/bff"
-	trmgrpc "github.com/bluefunda/trm-cli/internal/grpc"
+	pb "github.com/bluefunda/bluerequests/api/proto/bff"
+	trmgrpc "github.com/bluefunda/bluerequests/internal/grpc"
 )
 
 // fetchTimeout is the gRPC deadline for all TUI background calls.
