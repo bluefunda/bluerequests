@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.7.0](https://github.com/bluefunda/bluerequests/compare/v1.6.0...v1.7.0) (2026-05-23)
+
+
+### Features
+
+* rebrand trm-cli to bluerequests (req) ([#29](https://github.com/bluefunda/bluerequests/issues/29)) ([5d86269](https://github.com/bluefunda/bluerequests/commit/5d8626921739102cf3ddfbc6661726bceeed08de))
+* rename binary from req to breq ([#31](https://github.com/bluefunda/bluerequests/issues/31)) ([8b0341e](https://github.com/bluefunda/bluerequests/commit/8b0341eb4864ea1f0aad22983a3de012d0ca587e))
+
 ## [1.6.0](https://github.com/bluefunda/trm-cli/compare/v1.5.0...v1.6.0) (2026-05-22)
 
 
