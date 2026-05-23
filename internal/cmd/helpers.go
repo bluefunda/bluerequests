@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/bluefunda/trm-cli/internal/auth"
-	"github.com/bluefunda/trm-cli/internal/config"
-	trmgrpc "github.com/bluefunda/trm-cli/internal/grpc"
-	"github.com/bluefunda/trm-cli/internal/ui"
+	"github.com/bluefunda/bluerequests/internal/auth"
+	"github.com/bluefunda/bluerequests/internal/config"
+	trmgrpc "github.com/bluefunda/bluerequests/internal/grpc"
+	"github.com/bluefunda/bluerequests/internal/ui"
 )
 
 func saveAuthTokens(cfg *config.Config, tok *auth.TokenResponse) error {

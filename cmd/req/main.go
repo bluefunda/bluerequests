@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/bluefunda/trm-cli/internal/cmd"
+	"github.com/bluefunda/bluerequests/internal/cmd"
 )
 
 func main() {

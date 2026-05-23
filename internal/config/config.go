@@ -13,7 +13,7 @@ const (
 	DefaultBFFURL   = "requests.bluefunda.com:443"
 	DefaultDomain   = "bluefunda.com"
 	DefaultRealm    = "trm"
-	DefaultClientID = "trm-cli"
+	DefaultClientID = "bluerequests"
 )
 
 func AuthURL(domain, realm string) string {
@@ -46,7 +46,7 @@ func configDir() (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("home directory: %w", err)
 	}
-	dir := filepath.Join(home, ".trm")
+	dir := filepath.Join(home, ".req")
 	if err := os.MkdirAll(dir, 0700); err != nil {
 		return "", fmt.Errorf("create config dir: %w", err)
 	}

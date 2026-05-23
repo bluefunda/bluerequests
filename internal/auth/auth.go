@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/bluefunda/trm-cli/internal/config"
+	"github.com/bluefunda/bluerequests/internal/config"
 )
 
 type TokenResponse struct {

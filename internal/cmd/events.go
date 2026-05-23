@@ -9,8 +9,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	pb "github.com/bluefunda/trm-cli/api/proto/bff"
-	trmgrpc "github.com/bluefunda/trm-cli/internal/grpc"
+	pb "github.com/bluefunda/bluerequests/api/proto/bff"
+	trmgrpc "github.com/bluefunda/bluerequests/internal/grpc"
 )
 
 var eventsCmd = &cobra.Command{

@@ -3,8 +3,8 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/bluefunda/trm-cli/internal/config"
-	"github.com/bluefunda/trm-cli/internal/ui"
+	"github.com/bluefunda/bluerequests/internal/config"
+	"github.com/bluefunda/bluerequests/internal/ui"
 )
 
 var (
@@ -16,9 +16,9 @@ var (
 var Version = "dev"
 
 var rootCmd = &cobra.Command{
-	Use:     "requests",
-	Short:   "requests -- CLI for the bluerequests change/release management platform",
-	Long:    "requests is a command-line interface for interacting with the bluerequests platform via gRPC.",
+	Use:     "req",
+	Short:   "req -- CLI for the bluerequests change/release management platform",
+	Long:    "req is a command-line interface for interacting with the BlueRequests platform via gRPC.",
 	Version: Version,
 }
 

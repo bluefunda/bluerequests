@@ -1,11 +1,11 @@
 version: 2
 
-project_name: requests
+project_name: req
 
 builds:
-  - id: requests
-    main: ./cmd/requests
-    binary: requests
+  - id: req
+    main: ./cmd/req
+    binary: req
     env:
       - CGO_ENABLED=0
     goos:
@@ -16,13 +16,13 @@ builds:
       - arm64
     ldflags:
       - -s -w
-      - -X github.com/bluefunda/trm-cli/internal/cmd.Version={{ .Version }}
+      - -X github.com/bluefunda/bluerequests/internal/cmd.Version={{ .Version }}
     flags:
       - -trimpath
 
 archives:
-  - id: requests
-    name_template: "requests_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+  - id: req
+    name_template: "req_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     formats:
       - tar.gz
       - zip
@@ -37,25 +37,25 @@ archives:
       - none*
 
 nfpms:
-  - id: requests
-    package_name: requests
+  - id: req
+    package_name: req
     ids:
-      - requests
-    vendor: Bluefunda
-    maintainer: Bluefunda <support@bluefunda.com>
-    description: Cross-platform CLI for the bluerequests change/release management platform.
-    license: MIT
+      - req
+    vendor: BlueFunda
+    maintainer: BlueFunda <support@bluefunda.com>
+    description: Cross-platform CLI for the bluerequests change and release management platform.
+    license: Apache-2.0
     formats:
       - deb
       - rpm
-    bindir: /opt/requests/bin
+    bindir: /opt/req/bin
     contents:
-      - dst: /opt/requests/etc
+      - dst: /opt/req/etc
         type: dir
-      - dst: /opt/requests/log
+      - dst: /opt/req/log
         type: dir
-      - dst: /usr/local/bin/requests
-        src: /opt/requests/bin/requests
+      - dst: /usr/local/bin/req
+        src: /opt/req/bin/req
         type: symlink
 
 notarize:
@@ -70,13 +70,13 @@ notarize:
         key: "{{ .Env.NOTARIZATION_KEY }}"
 
 homebrew_casks:
-  - name: requests
+  - name: req
     ids:
-      - requests
+      - req
     binaries:
-      - requests
-    homepage: https://github.com/bluefunda/trm-cli
-    description: CLI for the bluerequests change/release management platform.
+      - req
+    homepage: https://github.com/bluefunda/bluerequests
+    description: CLI for the bluerequests change and release management platform
     directory: Casks
     repository:
       owner: bluefunda
@@ -99,54 +99,54 @@ changelog:
 release:
   github:
     owner: bluefunda
-    name: trm-cli
+    name: bluerequests
   draft: false
   replace_existing_draft: true
-  name_template: "requests CLI v{{ .Version }}"
+  name_template: "req v{{ .Version }}"
   header: |
-    ## requests CLI v{{ .Version }}
+    ## bluerequests CLI (req) v{{ .Version }}
 
-    Cross-platform CLI for the bluerequests change/release management platform.
+    Cross-platform CLI for the bluerequests change and release management platform.
 
     ### Installation
-
-    **One-line installer (macOS and Linux):**
-    ```bash
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/bluefunda/trm-cli/main/install.sh)"
-    ```
 
     **Homebrew (macOS):**
     ```bash
     brew tap bluefunda/tap
-    brew install --cask requests
+    brew install --cask req
+    ```
+
+    **One-line installer (macOS and Linux):**
+    ```bash
+    curl -fsSL https://raw.githubusercontent.com/bluefunda/bluerequests/main/install.sh | sh
     ```
 
     **Debian/Ubuntu (x86_64):**
     ```bash
-    curl -sL https://github.com/bluefunda/trm-cli/releases/download/v{{ .Version }}/requests_{{ .Version }}_linux_amd64.deb -o requests.deb
-    sudo dpkg -i requests.deb
+    curl -sL https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/req_{{ .Version }}_linux_amd64.deb -o req.deb
+    sudo dpkg -i req.deb
     ```
 
     **Debian/Ubuntu (ARM64):**
     ```bash
-    curl -sL https://github.com/bluefunda/trm-cli/releases/download/v{{ .Version }}/requests_{{ .Version }}_linux_arm64.deb -o requests.deb
-    sudo dpkg -i requests.deb
+    curl -sL https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/req_{{ .Version }}_linux_arm64.deb -o req.deb
+    sudo dpkg -i req.deb
     ```
 
     **RHEL / Fedora / Rocky (x86_64):**
     ```bash
-    sudo dnf install https://github.com/bluefunda/trm-cli/releases/download/v{{ .Version }}/requests_{{ .Version }}_linux_amd64.rpm
+    sudo dnf install https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/req_{{ .Version }}_linux_amd64.rpm
     ```
 
     **RHEL / Fedora / Rocky (ARM64):**
     ```bash
-    sudo dnf install https://github.com/bluefunda/trm-cli/releases/download/v{{ .Version }}/requests_{{ .Version }}_linux_arm64.rpm
+    sudo dnf install https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/req_{{ .Version }}_linux_arm64.rpm
     ```
 
     **Linux (manual):**
     ```bash
-    curl -sL https://github.com/bluefunda/trm-cli/releases/download/v{{ .Version }}/requests_{{ .Version }}_linux_amd64.tar.gz | tar xz
-    chmod +x requests && sudo mv requests /usr/local/bin/
+    curl -sL https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/req_{{ .Version }}_linux_amd64.tar.gz | tar xz
+    chmod +x req && sudo mv req /usr/local/bin/
     ```
 
 snapshot:

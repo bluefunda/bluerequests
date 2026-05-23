@@ -1,11 +1,11 @@
 .PHONY: build clean vet fmt tidy test proto snapshot release
 
-BINARY := requests
+BINARY := req
 VERSION ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo dev)
-LDFLAGS := -ldflags "-X github.com/bluefunda/trm-cli/internal/cmd.Version=$(VERSION)"
+LDFLAGS := -ldflags "-X github.com/bluefunda/bluerequests/internal/cmd.Version=$(VERSION)"
 
 build: tidy
-	go build $(LDFLAGS) -o $(BINARY) ./cmd/requests
+	go build $(LDFLAGS) -o $(BINARY) ./cmd/req
 
 clean:
 	rm -f $(BINARY)
