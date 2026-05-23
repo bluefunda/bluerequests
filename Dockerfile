@@ -15,9 +15,9 @@ COPY . .
 ARG VERSION=dev
 RUN CGO_ENABLED=0 go build \
     -ldflags "-X github.com/bluefunda/bluerequests/internal/cmd.Version=${VERSION}" \
-    -o /req ./cmd/req
+    -o /breq ./cmd/req
 
 FROM alpine:3.21
 RUN apk --no-cache add ca-certificates
-COPY --from=builder /req /usr/local/bin/req
-ENTRYPOINT ["req"]
+COPY --from=builder /breq /usr/local/bin/req
+ENTRYPOINT ["breq"]

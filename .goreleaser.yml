@@ -1,11 +1,11 @@
 version: 2
 
-project_name: req
+project_name: breq
 
 builds:
-  - id: req
-    main: ./cmd/req
-    binary: req
+  - id: breq
+    main: ./cmd/breq
+    binary: breq
     env:
       - CGO_ENABLED=0
     goos:
@@ -21,8 +21,8 @@ builds:
       - -trimpath
 
 archives:
-  - id: req
-    name_template: "req_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+  - id: breq
+    name_template: "breq_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
     formats:
       - tar.gz
       - zip
@@ -37,10 +37,10 @@ archives:
       - none*
 
 nfpms:
-  - id: req
-    package_name: req
+  - id: breq
+    package_name: breq
     ids:
-      - req
+      - breq
     vendor: BlueFunda
     maintainer: BlueFunda <support@bluefunda.com>
     description: Cross-platform CLI for the bluerequests change and release management platform.
@@ -48,14 +48,14 @@ nfpms:
     formats:
       - deb
       - rpm
-    bindir: /opt/req/bin
+    bindir: /opt/breq/bin
     contents:
-      - dst: /opt/req/etc
+      - dst: /opt/breq/etc
         type: dir
-      - dst: /opt/req/log
+      - dst: /opt/breq/log
         type: dir
-      - dst: /usr/local/bin/req
-        src: /opt/req/bin/req
+      - dst: /usr/local/bin/breq
+        src: /opt/breq/bin/breq
         type: symlink
 
 notarize:
@@ -70,11 +70,11 @@ notarize:
         key: "{{ .Env.NOTARIZATION_KEY }}"
 
 homebrew_casks:
-  - name: req
+  - name: breq
     ids:
-      - req
+      - breq
     binaries:
-      - req
+      - breq
     homepage: https://github.com/bluefunda/bluerequests
     description: CLI for the bluerequests change and release management platform
     directory: Casks
@@ -102,9 +102,9 @@ release:
     name: bluerequests
   draft: false
   replace_existing_draft: true
-  name_template: "req v{{ .Version }}"
+  name_template: "breq v{{ .Version }}"
   header: |
-    ## bluerequests CLI (req) v{{ .Version }}
+    ## bluerequests CLI (breq) v{{ .Version }}
 
     Cross-platform CLI for the bluerequests change and release management platform.
 
@@ -113,7 +113,7 @@ release:
     **Homebrew (macOS):**
     ```bash
     brew tap bluefunda/tap
-    brew install --cask req
+    brew install --cask breq
     ```
 
     **One-line installer (macOS and Linux):**
@@ -123,30 +123,30 @@ release:
 
     **Debian/Ubuntu (x86_64):**
     ```bash
-    curl -sL https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/req_{{ .Version }}_linux_amd64.deb -o req.deb
-    sudo dpkg -i req.deb
+    curl -sL https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/breq_{{ .Version }}_linux_amd64.deb -o breq.deb
+    sudo dpkg -i breq.deb
     ```
 
     **Debian/Ubuntu (ARM64):**
     ```bash
-    curl -sL https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/req_{{ .Version }}_linux_arm64.deb -o req.deb
-    sudo dpkg -i req.deb
+    curl -sL https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/breq_{{ .Version }}_linux_arm64.deb -o breq.deb
+    sudo dpkg -i breq.deb
     ```
 
     **RHEL / Fedora / Rocky (x86_64):**
     ```bash
-    sudo dnf install https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/req_{{ .Version }}_linux_amd64.rpm
+    sudo dnf install https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/breq_{{ .Version }}_linux_amd64.rpm
     ```
 
     **RHEL / Fedora / Rocky (ARM64):**
     ```bash
-    sudo dnf install https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/req_{{ .Version }}_linux_arm64.rpm
+    sudo dnf install https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/breq_{{ .Version }}_linux_arm64.rpm
     ```
 
     **Linux (manual):**
     ```bash
-    curl -sL https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/req_{{ .Version }}_linux_amd64.tar.gz | tar xz
-    chmod +x req && sudo mv req /usr/local/bin/
+    curl -sL https://github.com/bluefunda/bluerequests/releases/download/v{{ .Version }}/breq_{{ .Version }}_linux_amd64.tar.gz | tar xz
+    chmod +x breq && sudo mv breq /usr/local/bin/
     ```
 
 snapshot:

@@ -46,7 +46,7 @@ func configDir() (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("home directory: %w", err)
 	}
-	dir := filepath.Join(home, ".req")
+	dir := filepath.Join(home, ".breq")
 	if err := os.MkdirAll(dir, 0700); err != nil {
 		return "", fmt.Errorf("create config dir: %w", err)
 	}
