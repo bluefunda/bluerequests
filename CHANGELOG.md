@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/bluefunda/bluerequests/compare/v1.7.0...v1.7.1) (2026-05-23)
+
+
+### Bug Fixes
+
+* correct Dockerfile paths after req→breq rename and add packages:write to docker job ([#32](https://github.com/bluefunda/bluerequests/issues/32)) ([cfcea9e](https://github.com/bluefunda/bluerequests/commit/cfcea9ed7f8f83b05329cc0b5f090217fa8bcae8))
+
 ## [1.7.0](https://github.com/bluefunda/bluerequests/compare/v1.6.0...v1.7.0) (2026-05-23)
 
 
