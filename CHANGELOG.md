@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/bluefunda/bluerequests/compare/v1.7.1...v1.8.0) (2026-06-20)
+
+
+### Features
+
+* **update:** add breq update self-update command ([#35](https://github.com/bluefunda/bluerequests/issues/35)) ([#36](https://github.com/bluefunda/bluerequests/issues/36)) ([f9b6dfe](https://github.com/bluefunda/bluerequests/commit/f9b6dfe78938bc5135d0fa6789138437a5b4cd9f))
+
 ## [1.7.1](https://github.com/bluefunda/bluerequests/compare/v1.7.0...v1.7.1) (2026-05-23)
 
 
