@@ -35,6 +35,7 @@ func init() {
 		eventsCmd,
 		rpcCmd,
 		crCmd,
+		a4hCmd,
 		updateCmd,
 	)
 }

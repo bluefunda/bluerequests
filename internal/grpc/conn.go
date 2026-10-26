@@ -70,12 +70,12 @@ func (ts *TokenSource) Token() (string, error) {
 		if ts.cfg.Auth.AccessToken != "" {
 			return ts.cfg.Auth.AccessToken, nil
 		}
-		return "", fmt.Errorf("not authenticated; run 'trm login'")
+		return "", fmt.Errorf("not authenticated; run 'breq login'")
 	}
 
 	newToken, err := ts.refreshFunc()
 	if err != nil {
-		return "", fmt.Errorf("token refresh failed (run 'trm login'): %w", err)
+		return "", fmt.Errorf("token refresh failed (run 'breq login'): %w", err)
 	}
 	return newToken, nil
 }
@@ -115,7 +115,7 @@ type Conn struct {
 
 func Dial(target string, ts *TokenSource, opts ...grpc.DialOption) (*Conn, error) {
 	if target == "" {
-		return nil, fmt.Errorf("bff_url not configured; run 'trm login' or pass --bff")
+		return nil, fmt.Errorf("bff_url not configured; run 'breq login' or pass --bff")
 	}
 
 	defaults := []grpc.DialOption{

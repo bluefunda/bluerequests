@@ -16,7 +16,7 @@ var healthCmd = &cobra.Command{
 		p := printer(cfg)
 
 		if cfg.BFFURL == "" {
-			return fmt.Errorf("bff_url not configured; run 'trm login' or pass --bff")
+			return fmt.Errorf("bff_url not configured; run 'breq login' or pass --bff")
 		}
 
 		if err := trmgrpc.Ping(cfg.BFFURL); err != nil {
