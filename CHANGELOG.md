@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.1](https://github.com/bluefunda/bluerequests/compare/v1.9.0...v1.9.1) (2026-10-27)
+
+
+### Bug Fixes
+
+* **install:** match the exact archive line in checksums.txt ([#51](https://github.com/bluefunda/bluerequests/issues/51)) ([7e9e876](https://github.com/bluefunda/bluerequests/commit/7e9e876bafb534513308d462f08da05425ebe18f)), closes [#50](https://github.com/bluefunda/bluerequests/issues/50)
+
 ## [1.9.0](https://github.com/bluefunda/bluerequests/compare/v1.8.0...v1.9.0) (2026-10-27)
 
 
