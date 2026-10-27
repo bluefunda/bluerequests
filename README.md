@@ -108,6 +108,7 @@ breq [command] [flags]
 Commands:
   login       Authenticate via OAuth device flow
   cr          Manage change requests (list, get, create, update, delete, stage, comment)
+  a4h         On-demand SAP ABAP trial (A4H) session (status, start, extend, terminate, watch)
   events      Subscribe to or publish platform events
   rpc         Low-level gRPC request/reply (advanced)
   completion  Generate shell completions
@@ -150,6 +151,24 @@ breq cr comment add --id <id> --message "Approved for prod"
 breq cr comment update --id <id> --comment-id <cid> --message "Revised"
 breq cr comment delete --id <id> --comment-id <cid>
 ```
+
+### A4H Session Commands
+
+Start your own temporary SAP ABAP trial system, from the terminal. It takes about four minutes to be ready, ends
+after three hours (extend by one hour at a time) or one hour of inactivity, and is deleted when it ends.
+
+```bash
+breq a4h status                 # state "none" if you have no session
+breq a4h start --wait           # start (or show the running one) and follow progress until SAP is ready
+breq a4h extend                 # +1 hour
+breq a4h terminate              # end it and delete the system (asks first; -y to skip, required when piped)
+breq a4h watch                  # live screen: progress, host/ports, time remaining; s start, e extend, x end
+```
+
+`status`, `start`, `extend` and `terminate` honour `-o table|json|quiet` (`quiet` prints only the state, e.g.
+`sap_running`). Once SAP is ready, `status` shows the host, SAP GUI instance (00, port 3200) and the ABAP
+Development Tools URLs (`:50000` HTTP, `:50001` HTTPS). States: `none`, `provisioning_vm`, `vm_running`,
+`waiting_for_sap`, `sap_running` (usable), `terminating`, `terminated`.
 
 ### Shell Completion
 
@@ -214,6 +233,7 @@ make snapshot   # Build release snapshot with goreleaser
 bluerequests/
 ├── cmd/breq/          # Entry point
 ├── internal/
+│   ├── a4h/          # A4H session states, steps, polling, formatting (shared by cmd and tui)
 │   ├── auth/         # OAuth2 device flow (RFC 8628)
 │   ├── cmd/          # Cobra command definitions
 │   ├── config/       # Config loader (~/.breq/config.yaml)

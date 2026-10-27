@@ -37,13 +37,13 @@ func reAuthenticate(cfg *config.Config, p *ui.Printer) error {
 func bffConn() (*trmgrpc.Conn, *config.Config, error) {
 	cfg := loadConfig()
 	if cfg.Auth.AccessToken == "" {
-		return nil, cfg, fmt.Errorf("not authenticated; run 'trm login'")
+		return nil, cfg, fmt.Errorf("not authenticated; run 'breq login'")
 	}
 
 	refreshFunc := func() (string, error) {
 		tok, err := auth.Refresh(cfg.Domain, cfg.Realm, cfg.Auth.RefreshToken)
 		if err != nil {
-			return "", fmt.Errorf("token refresh failed (run 'trm login'): %w", err)
+			return "", fmt.Errorf("token refresh failed (run 'breq login'): %w", err)
 		}
 		if err := saveAuthTokens(cfg, tok); err != nil {
 			return "", fmt.Errorf("save tokens: %w", err)

@@ -42,6 +42,8 @@ api/proto/
     bff.pb.go                   # Generated — do not edit by hand
     bff_grpc.pb.go              # Generated — do not edit by hand
 internal/
+  a4h/
+    session.go                  # A4H session states, steps, poll cadence, formatting (shared by cmd and tui)
   cmd/
     root.go                     # Root cobra command, global flags (--bff, --realm, --output)
     helpers.go                  # bffConn(), printer(), token refresh utilities
@@ -52,6 +54,9 @@ internal/
     cr.go                       # Change request + comment commands (list/get/create/update/delete/stage)
     events.go                   # Event subscribe/publish commands
     rpc.go                      # Low-level request-reply command
+    a4h.go                      # A4H session commands (status/start/extend/terminate/watch)
+  tui/
+    a4h.go                      # Live A4H session screen (breq a4h watch); the CR dashboard is model/list/detail.go
   grpc/
     conn.go                     # gRPC connection, TLS auto-detect, auth interceptors
   auth/
@@ -82,6 +87,10 @@ scripts/
 | `breq cr comment add`    | AddComment          | Add a comment                        |
 | `breq cr comment update` | UpdateComment       | Edit a comment                       |
 | `breq cr comment delete` | DeleteComment       | Delete a comment                     |
+| `breq a4h status`   | GetA4HSession            | Show your on-demand SAP trial session |
+| `breq a4h start`    | StartA4HSession          | Start (or return the running) session |
+| `breq a4h extend`   | ExtendA4HSession         | Extend the session by one hour       |
+| `breq a4h terminate`| TerminateA4HSession      | End the session, delete the system   |
 
 ## Adding a New Command
 
@@ -147,6 +156,13 @@ Follows `bluefunda` org-level standards:
 - `google.golang.org/grpc` — gRPC client
 - `google.golang.org/protobuf` — Protobuf runtime
 - `gopkg.in/yaml.v3` — Config file parsing
+
+## Identity is not the CLI's to assert
+
+The CLI puts `x-realm` and `x-user-id` (from the token it decoded locally) on every call, and nginx forwards gRPC
+to trm-bff without checking tokens. trm-bff therefore must not trust that metadata for anything that acts on a
+user ID alone. The A4H methods verify the bearer token with Keycloak and ignore `x-user-id` (bluefunda/trm-bff#51);
+when adding an RPC like that, do the same on the server. The CLI never sends a user ID in a request body.
 
 ## Do NOT
 
