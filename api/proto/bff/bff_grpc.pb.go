@@ -33,6 +33,10 @@ const (
 	BFFService_AddComment_FullMethodName               = "/bff.v1.BFFService/AddComment"
 	BFFService_UpdateComment_FullMethodName            = "/bff.v1.BFFService/UpdateComment"
 	BFFService_DeleteComment_FullMethodName            = "/bff.v1.BFFService/DeleteComment"
+	BFFService_GetA4HSession_FullMethodName            = "/bff.v1.BFFService/GetA4HSession"
+	BFFService_StartA4HSession_FullMethodName          = "/bff.v1.BFFService/StartA4HSession"
+	BFFService_ExtendA4HSession_FullMethodName         = "/bff.v1.BFFService/ExtendA4HSession"
+	BFFService_TerminateA4HSession_FullMethodName      = "/bff.v1.BFFService/TerminateA4HSession"
 )
 
 // BFFServiceClient is the client API for BFFService service.
@@ -59,6 +63,13 @@ type BFFServiceClient interface {
 	AddComment(ctx context.Context, in *AddCommentRequest, opts ...grpc.CallOption) (*AddCommentResponse, error)
 	UpdateComment(ctx context.Context, in *UpdateCommentRequest, opts ...grpc.CallOption) (*UpdateCommentResponse, error)
 	DeleteComment(ctx context.Context, in *DeleteCommentRequest, opts ...grpc.CallOption) (*DeleteCommentResponse, error)
+	// A4H on-demand SAP trial sessions (answered by a4h-worker over NATS).
+	// The session belongs to the authenticated user; nothing in the requests
+	// selects whose it is.
+	GetA4HSession(ctx context.Context, in *GetA4HSessionRequest, opts ...grpc.CallOption) (*A4HSessionResponse, error)
+	StartA4HSession(ctx context.Context, in *StartA4HSessionRequest, opts ...grpc.CallOption) (*A4HSessionResponse, error)
+	ExtendA4HSession(ctx context.Context, in *ExtendA4HSessionRequest, opts ...grpc.CallOption) (*A4HSessionResponse, error)
+	TerminateA4HSession(ctx context.Context, in *TerminateA4HSessionRequest, opts ...grpc.CallOption) (*A4HSessionResponse, error)
 }
 
 type bFFServiceClient struct {
@@ -218,6 +229,46 @@ func (c *bFFServiceClient) DeleteComment(ctx context.Context, in *DeleteCommentR
 	return out, nil
 }
 
+func (c *bFFServiceClient) GetA4HSession(ctx context.Context, in *GetA4HSessionRequest, opts ...grpc.CallOption) (*A4HSessionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(A4HSessionResponse)
+	err := c.cc.Invoke(ctx, BFFService_GetA4HSession_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bFFServiceClient) StartA4HSession(ctx context.Context, in *StartA4HSessionRequest, opts ...grpc.CallOption) (*A4HSessionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(A4HSessionResponse)
+	err := c.cc.Invoke(ctx, BFFService_StartA4HSession_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bFFServiceClient) ExtendA4HSession(ctx context.Context, in *ExtendA4HSessionRequest, opts ...grpc.CallOption) (*A4HSessionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(A4HSessionResponse)
+	err := c.cc.Invoke(ctx, BFFService_ExtendA4HSession_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *bFFServiceClient) TerminateA4HSession(ctx context.Context, in *TerminateA4HSessionRequest, opts ...grpc.CallOption) (*A4HSessionResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(A4HSessionResponse)
+	err := c.cc.Invoke(ctx, BFFService_TerminateA4HSession_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BFFServiceServer is the server API for BFFService service.
 // All implementations must embed UnimplementedBFFServiceServer
 // for forward compatibility.
@@ -242,6 +293,13 @@ type BFFServiceServer interface {
 	AddComment(context.Context, *AddCommentRequest) (*AddCommentResponse, error)
 	UpdateComment(context.Context, *UpdateCommentRequest) (*UpdateCommentResponse, error)
 	DeleteComment(context.Context, *DeleteCommentRequest) (*DeleteCommentResponse, error)
+	// A4H on-demand SAP trial sessions (answered by a4h-worker over NATS).
+	// The session belongs to the authenticated user; nothing in the requests
+	// selects whose it is.
+	GetA4HSession(context.Context, *GetA4HSessionRequest) (*A4HSessionResponse, error)
+	StartA4HSession(context.Context, *StartA4HSessionRequest) (*A4HSessionResponse, error)
+	ExtendA4HSession(context.Context, *ExtendA4HSessionRequest) (*A4HSessionResponse, error)
+	TerminateA4HSession(context.Context, *TerminateA4HSessionRequest) (*A4HSessionResponse, error)
 	mustEmbedUnimplementedBFFServiceServer()
 }
 
@@ -293,6 +351,18 @@ func (UnimplementedBFFServiceServer) UpdateComment(context.Context, *UpdateComme
 }
 func (UnimplementedBFFServiceServer) DeleteComment(context.Context, *DeleteCommentRequest) (*DeleteCommentResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DeleteComment not implemented")
+}
+func (UnimplementedBFFServiceServer) GetA4HSession(context.Context, *GetA4HSessionRequest) (*A4HSessionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetA4HSession not implemented")
+}
+func (UnimplementedBFFServiceServer) StartA4HSession(context.Context, *StartA4HSessionRequest) (*A4HSessionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method StartA4HSession not implemented")
+}
+func (UnimplementedBFFServiceServer) ExtendA4HSession(context.Context, *ExtendA4HSessionRequest) (*A4HSessionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ExtendA4HSession not implemented")
+}
+func (UnimplementedBFFServiceServer) TerminateA4HSession(context.Context, *TerminateA4HSessionRequest) (*A4HSessionResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method TerminateA4HSession not implemented")
 }
 func (UnimplementedBFFServiceServer) mustEmbedUnimplementedBFFServiceServer() {}
 func (UnimplementedBFFServiceServer) testEmbeddedByValue()                    {}
@@ -560,6 +630,78 @@ func _BFFService_DeleteComment_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _BFFService_GetA4HSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetA4HSessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BFFServiceServer).GetA4HSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BFFService_GetA4HSession_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BFFServiceServer).GetA4HSession(ctx, req.(*GetA4HSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BFFService_StartA4HSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartA4HSessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BFFServiceServer).StartA4HSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BFFService_StartA4HSession_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BFFServiceServer).StartA4HSession(ctx, req.(*StartA4HSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BFFService_ExtendA4HSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExtendA4HSessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BFFServiceServer).ExtendA4HSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BFFService_ExtendA4HSession_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BFFServiceServer).ExtendA4HSession(ctx, req.(*ExtendA4HSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _BFFService_TerminateA4HSession_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TerminateA4HSessionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BFFServiceServer).TerminateA4HSession(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: BFFService_TerminateA4HSession_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BFFServiceServer).TerminateA4HSession(ctx, req.(*TerminateA4HSessionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // BFFService_ServiceDesc is the grpc.ServiceDesc for BFFService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -618,6 +760,22 @@ var BFFService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteComment",
 			Handler:    _BFFService_DeleteComment_Handler,
+		},
+		{
+			MethodName: "GetA4HSession",
+			Handler:    _BFFService_GetA4HSession_Handler,
+		},
+		{
+			MethodName: "StartA4HSession",
+			Handler:    _BFFService_StartA4HSession_Handler,
+		},
+		{
+			MethodName: "ExtendA4HSession",
+			Handler:    _BFFService_ExtendA4HSession_Handler,
+		},
+		{
+			MethodName: "TerminateA4HSession",
+			Handler:    _BFFService_TerminateA4HSession_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

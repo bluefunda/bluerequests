@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package bff.v1;
 
-option go_package = "github.com/bluefunda/trm-cli/api/proto/bff";
+option go_package = "github.com/bluefunda/bluerequests/api/proto/bff";
 
 // BFFService provides backend-for-frontend operations for the TRM platform.
 service BFFService {
@@ -27,6 +27,14 @@ service BFFService {
   rpc AddComment(AddCommentRequest) returns (AddCommentResponse);
   rpc UpdateComment(UpdateCommentRequest) returns (UpdateCommentResponse);
   rpc DeleteComment(DeleteCommentRequest) returns (DeleteCommentResponse);
+
+  // A4H on-demand SAP trial sessions (answered by a4h-worker over NATS).
+  // The session belongs to the authenticated user; nothing in the requests
+  // selects whose it is.
+  rpc GetA4HSession(GetA4HSessionRequest) returns (A4HSessionResponse);
+  rpc StartA4HSession(StartA4HSessionRequest) returns (A4HSessionResponse);
+  rpc ExtendA4HSession(ExtendA4HSessionRequest) returns (A4HSessionResponse);
+  rpc TerminateA4HSession(TerminateA4HSessionRequest) returns (A4HSessionResponse);
 }
 
 // ─── User ────────────────────────────────────────────────────────────────────
@@ -192,3 +200,32 @@ message DeleteCommentRequest {
 }
 
 message DeleteCommentResponse {}
+
+// ── A4H sessions ─────────────────────────────────────────────────────────────
+
+message GetA4HSessionRequest {}
+
+// Starts the caller's session, or returns the one already running.
+message StartA4HSessionRequest {}
+
+// Extends the running session by one hour.
+message ExtendA4HSessionRequest {}
+
+// Ends the session and deletes its system.
+message TerminateA4HSessionRequest {}
+
+message A4HSession {
+  // none, provisioning_vm, vm_running, waiting_for_sap, sap_running,
+  // terminating or terminated. sap_running means the system is usable.
+  string state = 1;
+  string instance_name = 2;
+  // Set from vm_running on.
+  string public_ip = 3;
+  // RFC 3339; empty until the session is running.
+  string deadline = 4;
+  string last_active_at = 5;
+}
+
+message A4HSessionResponse {
+  A4HSession session = 1;
+}

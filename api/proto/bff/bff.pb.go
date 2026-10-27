@@ -1661,6 +1661,277 @@ func (*DeleteCommentResponse) Descriptor() ([]byte, []int) {
 	return file_bff_proto_rawDescGZIP(), []int{29}
 }
 
+type GetA4HSessionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetA4HSessionRequest) Reset() {
+	*x = GetA4HSessionRequest{}
+	mi := &file_bff_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetA4HSessionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetA4HSessionRequest) ProtoMessage() {}
+
+func (x *GetA4HSessionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_bff_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetA4HSessionRequest.ProtoReflect.Descriptor instead.
+func (*GetA4HSessionRequest) Descriptor() ([]byte, []int) {
+	return file_bff_proto_rawDescGZIP(), []int{30}
+}
+
+// Starts the caller's session, or returns the one already running.
+type StartA4HSessionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *StartA4HSessionRequest) Reset() {
+	*x = StartA4HSessionRequest{}
+	mi := &file_bff_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *StartA4HSessionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartA4HSessionRequest) ProtoMessage() {}
+
+func (x *StartA4HSessionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_bff_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartA4HSessionRequest.ProtoReflect.Descriptor instead.
+func (*StartA4HSessionRequest) Descriptor() ([]byte, []int) {
+	return file_bff_proto_rawDescGZIP(), []int{31}
+}
+
+// Extends the running session by one hour.
+type ExtendA4HSessionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExtendA4HSessionRequest) Reset() {
+	*x = ExtendA4HSessionRequest{}
+	mi := &file_bff_proto_msgTypes[32]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExtendA4HSessionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExtendA4HSessionRequest) ProtoMessage() {}
+
+func (x *ExtendA4HSessionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_bff_proto_msgTypes[32]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExtendA4HSessionRequest.ProtoReflect.Descriptor instead.
+func (*ExtendA4HSessionRequest) Descriptor() ([]byte, []int) {
+	return file_bff_proto_rawDescGZIP(), []int{32}
+}
+
+// Ends the session and deletes its system.
+type TerminateA4HSessionRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TerminateA4HSessionRequest) Reset() {
+	*x = TerminateA4HSessionRequest{}
+	mi := &file_bff_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TerminateA4HSessionRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TerminateA4HSessionRequest) ProtoMessage() {}
+
+func (x *TerminateA4HSessionRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_bff_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TerminateA4HSessionRequest.ProtoReflect.Descriptor instead.
+func (*TerminateA4HSessionRequest) Descriptor() ([]byte, []int) {
+	return file_bff_proto_rawDescGZIP(), []int{33}
+}
+
+type A4HSession struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// none, provisioning_vm, vm_running, waiting_for_sap, sap_running,
+	// terminating or terminated. sap_running means the system is usable.
+	State        string `protobuf:"bytes,1,opt,name=state,proto3" json:"state,omitempty"`
+	InstanceName string `protobuf:"bytes,2,opt,name=instance_name,json=instanceName,proto3" json:"instance_name,omitempty"`
+	// Set from vm_running on.
+	PublicIp string `protobuf:"bytes,3,opt,name=public_ip,json=publicIp,proto3" json:"public_ip,omitempty"`
+	// RFC 3339; empty until the session is running.
+	Deadline      string `protobuf:"bytes,4,opt,name=deadline,proto3" json:"deadline,omitempty"`
+	LastActiveAt  string `protobuf:"bytes,5,opt,name=last_active_at,json=lastActiveAt,proto3" json:"last_active_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *A4HSession) Reset() {
+	*x = A4HSession{}
+	mi := &file_bff_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *A4HSession) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*A4HSession) ProtoMessage() {}
+
+func (x *A4HSession) ProtoReflect() protoreflect.Message {
+	mi := &file_bff_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use A4HSession.ProtoReflect.Descriptor instead.
+func (*A4HSession) Descriptor() ([]byte, []int) {
+	return file_bff_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *A4HSession) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
+func (x *A4HSession) GetInstanceName() string {
+	if x != nil {
+		return x.InstanceName
+	}
+	return ""
+}
+
+func (x *A4HSession) GetPublicIp() string {
+	if x != nil {
+		return x.PublicIp
+	}
+	return ""
+}
+
+func (x *A4HSession) GetDeadline() string {
+	if x != nil {
+		return x.Deadline
+	}
+	return ""
+}
+
+func (x *A4HSession) GetLastActiveAt() string {
+	if x != nil {
+		return x.LastActiveAt
+	}
+	return ""
+}
+
+type A4HSessionResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Session       *A4HSession            `protobuf:"bytes,1,opt,name=session,proto3" json:"session,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *A4HSessionResponse) Reset() {
+	*x = A4HSessionResponse{}
+	mi := &file_bff_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *A4HSessionResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*A4HSessionResponse) ProtoMessage() {}
+
+func (x *A4HSessionResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_bff_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use A4HSessionResponse.ProtoReflect.Descriptor instead.
+func (*A4HSessionResponse) Descriptor() ([]byte, []int) {
+	return file_bff_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *A4HSessionResponse) GetSession() *A4HSession {
+	if x != nil {
+		return x.Session
+	}
+	return nil
+}
+
 var File_bff_proto protoreflect.FileDescriptor
 
 const file_bff_proto_rawDesc = "" +
@@ -1777,7 +2048,20 @@ const file_bff_proto_rawDesc = "" +
 	"\acomment\x18\x01 \x01(\v2\x0f.bff.v1.CommentR\acomment\"&\n" +
 	"\x14DeleteCommentRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"\x17\n" +
-	"\x15DeleteCommentResponse2\x9d\t\n" +
+	"\x15DeleteCommentResponse\"\x16\n" +
+	"\x14GetA4HSessionRequest\"\x18\n" +
+	"\x16StartA4HSessionRequest\"\x19\n" +
+	"\x17ExtendA4HSessionRequest\"\x1c\n" +
+	"\x1aTerminateA4HSessionRequest\"\xa6\x01\n" +
+	"\n" +
+	"A4HSession\x12\x14\n" +
+	"\x05state\x18\x01 \x01(\tR\x05state\x12#\n" +
+	"\rinstance_name\x18\x02 \x01(\tR\finstanceName\x12\x1b\n" +
+	"\tpublic_ip\x18\x03 \x01(\tR\bpublicIp\x12\x1a\n" +
+	"\bdeadline\x18\x04 \x01(\tR\bdeadline\x12$\n" +
+	"\x0elast_active_at\x18\x05 \x01(\tR\flastActiveAt\"B\n" +
+	"\x12A4HSessionResponse\x12,\n" +
+	"\asession\x18\x01 \x01(\v2\x12.bff.v1.A4HSessionR\asession2\xdf\v\n" +
 	"\n" +
 	"BFFService\x12F\n" +
 	"\vGetUserInfo\x12\x1a.bff.v1.GetUserInfoRequest\x1a\x1b.bff.v1.GetUserInfoResponse\x12B\n" +
@@ -1794,7 +2078,11 @@ const file_bff_proto_rawDesc = "" +
 	"\n" +
 	"AddComment\x12\x19.bff.v1.AddCommentRequest\x1a\x1a.bff.v1.AddCommentResponse\x12L\n" +
 	"\rUpdateComment\x12\x1c.bff.v1.UpdateCommentRequest\x1a\x1d.bff.v1.UpdateCommentResponse\x12L\n" +
-	"\rDeleteComment\x12\x1c.bff.v1.DeleteCommentRequest\x1a\x1d.bff.v1.DeleteCommentResponseB1Z/github.com/bluefunda/bluerequests/api/proto/bffb\x06proto3"
+	"\rDeleteComment\x12\x1c.bff.v1.DeleteCommentRequest\x1a\x1d.bff.v1.DeleteCommentResponse\x12I\n" +
+	"\rGetA4HSession\x12\x1c.bff.v1.GetA4HSessionRequest\x1a\x1a.bff.v1.A4HSessionResponse\x12M\n" +
+	"\x0fStartA4HSession\x12\x1e.bff.v1.StartA4HSessionRequest\x1a\x1a.bff.v1.A4HSessionResponse\x12O\n" +
+	"\x10ExtendA4HSession\x12\x1f.bff.v1.ExtendA4HSessionRequest\x1a\x1a.bff.v1.A4HSessionResponse\x12U\n" +
+	"\x13TerminateA4HSession\x12\".bff.v1.TerminateA4HSessionRequest\x1a\x1a.bff.v1.A4HSessionResponseB1Z/github.com/bluefunda/bluerequests/api/proto/bffb\x06proto3"
 
 var (
 	file_bff_proto_rawDescOnce sync.Once
@@ -1808,7 +2096,7 @@ func file_bff_proto_rawDescGZIP() []byte {
 	return file_bff_proto_rawDescData
 }
 
-var file_bff_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
+var file_bff_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
 var file_bff_proto_goTypes = []any{
 	(*GetUserInfoRequest)(nil),               // 0: bff.v1.GetUserInfoRequest
 	(*GetUserInfoResponse)(nil),              // 1: bff.v1.GetUserInfoResponse
@@ -1840,6 +2128,12 @@ var file_bff_proto_goTypes = []any{
 	(*UpdateCommentResponse)(nil),            // 27: bff.v1.UpdateCommentResponse
 	(*DeleteCommentRequest)(nil),             // 28: bff.v1.DeleteCommentRequest
 	(*DeleteCommentResponse)(nil),            // 29: bff.v1.DeleteCommentResponse
+	(*GetA4HSessionRequest)(nil),             // 30: bff.v1.GetA4HSessionRequest
+	(*StartA4HSessionRequest)(nil),           // 31: bff.v1.StartA4HSessionRequest
+	(*ExtendA4HSessionRequest)(nil),          // 32: bff.v1.ExtendA4HSessionRequest
+	(*TerminateA4HSessionRequest)(nil),       // 33: bff.v1.TerminateA4HSessionRequest
+	(*A4HSession)(nil),                       // 34: bff.v1.A4HSession
+	(*A4HSessionResponse)(nil),               // 35: bff.v1.A4HSessionResponse
 }
 var file_bff_proto_depIdxs = []int32{
 	8,  // 0: bff.v1.ListChangeRequestsResponse.change_requests:type_name -> bff.v1.ChangeRequest
@@ -1850,39 +2144,48 @@ var file_bff_proto_depIdxs = []int32{
 	21, // 5: bff.v1.ListCommentsResponse.comments:type_name -> bff.v1.Comment
 	21, // 6: bff.v1.AddCommentResponse.comment:type_name -> bff.v1.Comment
 	21, // 7: bff.v1.UpdateCommentResponse.comment:type_name -> bff.v1.Comment
-	0,  // 8: bff.v1.BFFService.GetUserInfo:input_type -> bff.v1.GetUserInfoRequest
-	2,  // 9: bff.v1.BFFService.SubscribeEvents:input_type -> bff.v1.SubscribeEventsRequest
-	4,  // 10: bff.v1.BFFService.PublishEvent:input_type -> bff.v1.PublishEventRequest
-	6,  // 11: bff.v1.BFFService.RequestReply:input_type -> bff.v1.RequestReplyRequest
-	9,  // 12: bff.v1.BFFService.ListChangeRequests:input_type -> bff.v1.ListChangeRequestsRequest
-	11, // 13: bff.v1.BFFService.GetChangeRequest:input_type -> bff.v1.GetChangeRequestRequest
-	13, // 14: bff.v1.BFFService.CreateChangeRequest:input_type -> bff.v1.CreateChangeRequestRequest
-	15, // 15: bff.v1.BFFService.UpdateChangeRequest:input_type -> bff.v1.UpdateChangeRequestRequest
-	17, // 16: bff.v1.BFFService.DeleteChangeRequest:input_type -> bff.v1.DeleteChangeRequestRequest
-	19, // 17: bff.v1.BFFService.UpdateChangeRequestStage:input_type -> bff.v1.UpdateChangeRequestStageRequest
-	22, // 18: bff.v1.BFFService.ListComments:input_type -> bff.v1.ListCommentsRequest
-	24, // 19: bff.v1.BFFService.AddComment:input_type -> bff.v1.AddCommentRequest
-	26, // 20: bff.v1.BFFService.UpdateComment:input_type -> bff.v1.UpdateCommentRequest
-	28, // 21: bff.v1.BFFService.DeleteComment:input_type -> bff.v1.DeleteCommentRequest
-	1,  // 22: bff.v1.BFFService.GetUserInfo:output_type -> bff.v1.GetUserInfoResponse
-	3,  // 23: bff.v1.BFFService.SubscribeEvents:output_type -> bff.v1.Event
-	5,  // 24: bff.v1.BFFService.PublishEvent:output_type -> bff.v1.PublishEventResponse
-	7,  // 25: bff.v1.BFFService.RequestReply:output_type -> bff.v1.RequestReplyResponse
-	10, // 26: bff.v1.BFFService.ListChangeRequests:output_type -> bff.v1.ListChangeRequestsResponse
-	12, // 27: bff.v1.BFFService.GetChangeRequest:output_type -> bff.v1.GetChangeRequestResponse
-	14, // 28: bff.v1.BFFService.CreateChangeRequest:output_type -> bff.v1.CreateChangeRequestResponse
-	16, // 29: bff.v1.BFFService.UpdateChangeRequest:output_type -> bff.v1.UpdateChangeRequestResponse
-	18, // 30: bff.v1.BFFService.DeleteChangeRequest:output_type -> bff.v1.DeleteChangeRequestResponse
-	20, // 31: bff.v1.BFFService.UpdateChangeRequestStage:output_type -> bff.v1.UpdateChangeRequestStageResponse
-	23, // 32: bff.v1.BFFService.ListComments:output_type -> bff.v1.ListCommentsResponse
-	25, // 33: bff.v1.BFFService.AddComment:output_type -> bff.v1.AddCommentResponse
-	27, // 34: bff.v1.BFFService.UpdateComment:output_type -> bff.v1.UpdateCommentResponse
-	29, // 35: bff.v1.BFFService.DeleteComment:output_type -> bff.v1.DeleteCommentResponse
-	22, // [22:36] is the sub-list for method output_type
-	8,  // [8:22] is the sub-list for method input_type
-	8,  // [8:8] is the sub-list for extension type_name
-	8,  // [8:8] is the sub-list for extension extendee
-	0,  // [0:8] is the sub-list for field type_name
+	34, // 8: bff.v1.A4HSessionResponse.session:type_name -> bff.v1.A4HSession
+	0,  // 9: bff.v1.BFFService.GetUserInfo:input_type -> bff.v1.GetUserInfoRequest
+	2,  // 10: bff.v1.BFFService.SubscribeEvents:input_type -> bff.v1.SubscribeEventsRequest
+	4,  // 11: bff.v1.BFFService.PublishEvent:input_type -> bff.v1.PublishEventRequest
+	6,  // 12: bff.v1.BFFService.RequestReply:input_type -> bff.v1.RequestReplyRequest
+	9,  // 13: bff.v1.BFFService.ListChangeRequests:input_type -> bff.v1.ListChangeRequestsRequest
+	11, // 14: bff.v1.BFFService.GetChangeRequest:input_type -> bff.v1.GetChangeRequestRequest
+	13, // 15: bff.v1.BFFService.CreateChangeRequest:input_type -> bff.v1.CreateChangeRequestRequest
+	15, // 16: bff.v1.BFFService.UpdateChangeRequest:input_type -> bff.v1.UpdateChangeRequestRequest
+	17, // 17: bff.v1.BFFService.DeleteChangeRequest:input_type -> bff.v1.DeleteChangeRequestRequest
+	19, // 18: bff.v1.BFFService.UpdateChangeRequestStage:input_type -> bff.v1.UpdateChangeRequestStageRequest
+	22, // 19: bff.v1.BFFService.ListComments:input_type -> bff.v1.ListCommentsRequest
+	24, // 20: bff.v1.BFFService.AddComment:input_type -> bff.v1.AddCommentRequest
+	26, // 21: bff.v1.BFFService.UpdateComment:input_type -> bff.v1.UpdateCommentRequest
+	28, // 22: bff.v1.BFFService.DeleteComment:input_type -> bff.v1.DeleteCommentRequest
+	30, // 23: bff.v1.BFFService.GetA4HSession:input_type -> bff.v1.GetA4HSessionRequest
+	31, // 24: bff.v1.BFFService.StartA4HSession:input_type -> bff.v1.StartA4HSessionRequest
+	32, // 25: bff.v1.BFFService.ExtendA4HSession:input_type -> bff.v1.ExtendA4HSessionRequest
+	33, // 26: bff.v1.BFFService.TerminateA4HSession:input_type -> bff.v1.TerminateA4HSessionRequest
+	1,  // 27: bff.v1.BFFService.GetUserInfo:output_type -> bff.v1.GetUserInfoResponse
+	3,  // 28: bff.v1.BFFService.SubscribeEvents:output_type -> bff.v1.Event
+	5,  // 29: bff.v1.BFFService.PublishEvent:output_type -> bff.v1.PublishEventResponse
+	7,  // 30: bff.v1.BFFService.RequestReply:output_type -> bff.v1.RequestReplyResponse
+	10, // 31: bff.v1.BFFService.ListChangeRequests:output_type -> bff.v1.ListChangeRequestsResponse
+	12, // 32: bff.v1.BFFService.GetChangeRequest:output_type -> bff.v1.GetChangeRequestResponse
+	14, // 33: bff.v1.BFFService.CreateChangeRequest:output_type -> bff.v1.CreateChangeRequestResponse
+	16, // 34: bff.v1.BFFService.UpdateChangeRequest:output_type -> bff.v1.UpdateChangeRequestResponse
+	18, // 35: bff.v1.BFFService.DeleteChangeRequest:output_type -> bff.v1.DeleteChangeRequestResponse
+	20, // 36: bff.v1.BFFService.UpdateChangeRequestStage:output_type -> bff.v1.UpdateChangeRequestStageResponse
+	23, // 37: bff.v1.BFFService.ListComments:output_type -> bff.v1.ListCommentsResponse
+	25, // 38: bff.v1.BFFService.AddComment:output_type -> bff.v1.AddCommentResponse
+	27, // 39: bff.v1.BFFService.UpdateComment:output_type -> bff.v1.UpdateCommentResponse
+	29, // 40: bff.v1.BFFService.DeleteComment:output_type -> bff.v1.DeleteCommentResponse
+	35, // 41: bff.v1.BFFService.GetA4HSession:output_type -> bff.v1.A4HSessionResponse
+	35, // 42: bff.v1.BFFService.StartA4HSession:output_type -> bff.v1.A4HSessionResponse
+	35, // 43: bff.v1.BFFService.ExtendA4HSession:output_type -> bff.v1.A4HSessionResponse
+	35, // 44: bff.v1.BFFService.TerminateA4HSession:output_type -> bff.v1.A4HSessionResponse
+	27, // [27:45] is the sub-list for method output_type
+	9,  // [9:27] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_bff_proto_init() }
@@ -1896,7 +2199,7 @@ func file_bff_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_bff_proto_rawDesc), len(file_bff_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   30,
+			NumMessages:   36,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

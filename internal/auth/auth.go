@@ -129,7 +129,7 @@ func pollToken(tokenURL, deviceCode string) (*TokenResponse, bool, error) {
 		case "authorization_pending", "slow_down":
 			return nil, false, nil
 		case "expired_token":
-			return nil, false, fmt.Errorf("device code expired — run 'trm login' again")
+			return nil, false, fmt.Errorf("device code expired — run 'breq login' again")
 		case "access_denied":
 			return nil, false, fmt.Errorf("login denied by user")
 		}
