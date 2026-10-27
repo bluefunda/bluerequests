@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/bluefunda/bluerequests/compare/v1.8.0...v1.9.0) (2026-10-27)
+
+
+### Features
+
+* **a4h:** add breq a4h commands and a live session screen ([#48](https://github.com/bluefunda/bluerequests/issues/48)) ([808245e](https://github.com/bluefunda/bluerequests/commit/808245e4ba308a9468d757ab8f0671d54563414d)), closes [#47](https://github.com/bluefunda/bluerequests/issues/47)
+
 ## [1.8.0](https://github.com/bluefunda/bluerequests/compare/v1.7.1...v1.8.0) (2026-06-20)
 
 
