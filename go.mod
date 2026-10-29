@@ -3,7 +3,7 @@ module github.com/bluefunda/bluerequests
 go 1.26.0
 
 require (
-	github.com/bluefunda/go-update v0.1.0
+	github.com/bluefunda/go-update v0.1.1
 	github.com/charmbracelet/bubbles v1.0.0
 	github.com/charmbracelet/bubbletea v1.3.10
 	github.com/charmbracelet/lipgloss v1.1.0
