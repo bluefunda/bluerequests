@@ -1,5 +1,17 @@
 # BlueRequests
 
+> [!IMPORTANT]
+> **breq has moved to [bluefunda/bluefunda-ai](https://github.com/bluefunda/bluefunda-ai/tree/main/breq).** This repository is archived. breq is now built and released there alongside `bai` and `abaper`, and is also available as `bai requests`. Version numbers continue in the bluefunda-ai series (after 1.9.1).
+>
+> Existing installs keep working: `brew upgrade --cask breq`, the one-line installer, deb/rpm and your `~/.breq` login are unchanged.
+>
+> | | Before | Now |
+> |---|---|---|
+> | Source | `github.com/bluefunda/bluerequests` | [`bluefunda-ai/breq`](https://github.com/bluefunda/bluefunda-ai/tree/main/breq) |
+> | Installer | `…/bluerequests/main/install.sh` | `https://raw.githubusercontent.com/bluefunda/bluefunda-ai/main/breq/install.sh` |
+> | `go install` | `github.com/bluefunda/bluerequests/cmd/breq@latest` | `github.com/bluefunda/bluefunda-ai/breq/cmd/breq@latest` |
+> | Issues | here | [bluefunda-ai issues](https://github.com/bluefunda/bluefunda-ai/issues) |
+
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Go Reference](https://pkg.go.dev/badge/github.com/bluefunda/bluerequests.svg)](https://pkg.go.dev/github.com/bluefunda/bluerequests)
 [![Release](https://img.shields.io/github/v/release/bluefunda/bluerequests)](https://github.com/bluefunda/bluerequests/releases)
